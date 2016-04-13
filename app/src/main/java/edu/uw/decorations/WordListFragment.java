@@ -1,7 +1,10 @@
 package edu.uw.decorations;
 
 
+import android.content.ContentResolver;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.UserDictionary;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 /**
@@ -18,7 +22,8 @@ public class WordListFragment extends Fragment {
 
     private static final String TAG = "WordList";
 
-    private ArrayAdapter<String> adapter;
+//    private ArrayAdapter<String> adapter;
+    private CursorAdapter adapter;
 
     public WordListFragment() {
         // Required empty public constructor
@@ -50,11 +55,27 @@ public class WordListFragment extends Fragment {
         //controller
         AdapterView listView = (AdapterView)rootView.findViewById(R.id.wordListView);
 
-        adapter = new ArrayAdapter<String>(
-                getActivity(), R.layout.list_item_layout, R.id.txtListItem, data);
+
+
+        // Content provider stuff:
+        ContentResolver resolver = getActivity().getContentResolver();
+        String projection = String[]{UserDictionary.Words.WORD, UserDictionary.Words.APP_ID};
+        Cursor cursor = resolver.query(UserDictionary.Words.CONTENT_URI,
+                projection, //Collumns to grab
+                null,       //
+                null,
+                null
+                );
+
+
+        adapter = new CursorAdapter(
+                getActivity(),
+                R.layout.list_item_layout
+                cursor
+        )
+//        adapter = new ArrayAdapter<String>(
+//                getActivity(), R.layout.list_item_layout, R.id.txtListItem, data);
         listView.setAdapter(adapter);
-
-
 
 
         //handle button input

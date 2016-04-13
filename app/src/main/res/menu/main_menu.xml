@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/helloMenuItem"
+        android:title="Say Hello"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/helloMenuItem2"
+        android:title="Say Hello"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/helloMenuItem3"
+        android:title="Say Hello"
+        android:icon="@android:drawable/ic_delete"
+        app:showAsAction="always"
+        />
+
+
+</menu>
